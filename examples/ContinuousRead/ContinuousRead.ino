@@ -10,18 +10,17 @@ void setup()
   delay(10);
   Wire.begin();
   delay(10);
-  
-  Serial.println("Start Calibration");
-  myCompass.calibration();
-  Serial.println("End Calibration");
 
   myCompass.setOutputMode(0);
+  //Continuous Mode, Periodic on ,Rate 20Hz
+  myCompass.setOperationalMode(0x72);
   Serial.print("Output mode: ");
   Serial.println(myCompass.getOutputMode());
 }
+
 void loop()
 {
-  heading = myCompass.getHeading();
+  heading = myCompass.requestData();
   Serial.println(heading);
   delay(100);
 }
